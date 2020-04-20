@@ -6,9 +6,9 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 
-var landRouter = require('./routes/land')
-var harvestRouter = require('./routes/harvest')
-var activityRouter = require('./routes/activity')
+var landsRouter = require('./routes/lands')
+var harvestsRouter = require('./routes/harvests')
+var activitiesRouter = require('./routes/activities')
 
 var app = express()
 
@@ -18,9 +18,9 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/land', landRouter)
-app.use('/harvest', harvestRouter)
-app.use('/activity', activityRouter)
+app.use('/lands', landsRouter)
+app.use('/harvests', harvestsRouter)
+app.use('/activities', activitiesRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

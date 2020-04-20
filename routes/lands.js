@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   try {
     const result = await Land.getAll()
     const results = {
-      status: 'Successfully get all users',
+      status: 'Successfully get all lands',
       data: (result) ? result.rows : null
     }
     res.send(results)
@@ -22,14 +22,34 @@ router.get('/', async (req, res) => {
 /*
  * GET land by id.
  */
-router.get('/:id', async (req, res) => {
+router.get('/by-id/:id', async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).send({ status: 400, message: 'No id provided' })
     }
     const result = await Land.getById(req.params.id)
     const results = {
-      status: 'Successfully get user',
+      status: 'Successfully get land',
+      data: (result) ? result.rows : null
+    }
+    res.send(results)
+  } catch (err) {
+    console.error(err)
+    return res.status(500).send(err)
+  }
+})
+
+/*
+ * GET land by user id.
+ */
+router.get('/by-user/:id', async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).send({ status: 400, message: 'No id provided' })
+    }
+    const result = await Land.getByUserId(req.params.id)
+    const results = {
+      status: 'Successfully get land',
       data: (result) ? result.rows : null
     }
     res.send(results)
@@ -45,20 +65,17 @@ router.get('/:id', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
-    if (!req.body.nama || !req.body.email || !req.body.password || !req.body.no_telepon || !req.body.role) {
+    if (!req.body.nama || !req.body.deskripsi || !req.body.tanaman) {
       return res.status(400).send({ status: 400, message: 'One or more data is missing' })
     }
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const payload = [
       req.body.nama,
-      req.body.email,
-      hashedPassword,
-      req.body.no_telepon,
-      req.body.role
+      req.body.deskripsi,
+      req.body.tanaman
     ]
     const result = await Land.create(payload)
     const results = {
-      status: 'User created successfully',
+      status: 'Land created successfully',
       data: (result) ? result.rows : null
     }
     res.send(results)
@@ -78,7 +95,7 @@ router.delete('/:id', async (req, res) => {
     }
     const result = await Land.delete(req.params.id)
     const results = {
-      status: 'User deleted successfully',
+      status: 'Land deleted successfully',
       data: (result) ? result.rows : null
     }
     res.send(results)
