@@ -14,17 +14,17 @@ exports.getById = async (id) => {
   return result
 }
 
-exports.getByUserId = async (landId) => {
+exports.getByUserId = async (userId) => {
   const client = await pool.connect()
-  const result = await client.query('SELECT * FROM lahan WHERE id_lahan = $1;', [landId])
+  const result = await client.query('SELECT * FROM lahan WHERE id_pengguna = $1;', [userId])
   client.release()
   return result
 }
 
 exports.create = async (payload) => {
   const client = await pool.connect()
-  const result = await client.query(`INSERT INTO lahan (nama, deskripsi, tanaman) 
-                                     VALUES ($1, $2, $3) RETURNING *;`, payload)
+  const result = await client.query(`INSERT INTO lahan (id_pengguna, nama, deskripsi, tanaman, created_at) 
+                                     VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING *;`, payload)
   client.release()
   return result
 }

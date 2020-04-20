@@ -42,12 +42,12 @@ router.get('/by-id/:id', async (req, res) => {
 /*
  * GET land by user id.
  */
-router.get('/by-user/:id', async (req, res) => {
+router.get('/by-user/:userId', async (req, res) => {
   try {
-    if (!req.params.id) {
+    if (!req.params.userId) {
       return res.status(400).send({ status: 400, message: 'No id provided' })
     }
-    const result = await Land.getByUserId(req.params.id)
+    const result = await Land.getByUserId(req.params.userId)
     const results = {
       status: 'Successfully get land',
       data: (result) ? result.rows : null
