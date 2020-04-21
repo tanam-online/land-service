@@ -22,6 +22,13 @@ app.use('/lands', landsRouter)
 app.use('/harvests', harvestsRouter)
 app.use('/activities', activitiesRouter)
 
+/*
+ * Check if API is live.
+ */
+app.get('/', (req, res) => {
+  res.send('You are connected')
+})
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))
