@@ -43,12 +43,16 @@ router.get('/:landId', async (req, res) => {
  * POST new activity.
  * @param req in JSON format
  */
-router.post('/', async (req, res) => {
+router.post('/:landId', async (req, res) => {
   try {
-    if (!req.body.nama || !req.body.email || !req.body.password || !req.body.no_telepon || !req.body.role) {
+    if (!req.params.landId || !req.body.deskripsi || !req.body.aktivitas || !req.body.waktu) {
       return res.status(400).send({ status: 400, message: 'One or more data is missing' })
     }
     const payload = [
+      req.params.landId,
+      req.body.deskripsi,
+      req.body.aktivitas,
+      req.body.waktu
     ]
     const result = await Activity.create(payload)
     const results = {

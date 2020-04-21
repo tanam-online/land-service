@@ -63,12 +63,13 @@ router.get('/by-user/:userId', async (req, res) => {
  * POST new land.
  * @param req in JSON format
  */
-router.post('/', async (req, res) => {
+router.post('/:userId', async (req, res) => {
   try {
-    if (!req.body.nama || !req.body.deskripsi || !req.body.tanaman) {
+    if (!req.params.userId || !req.body.nama || !req.body.deskripsi || !req.body.tanaman) {
       return res.status(400).send({ status: 400, message: 'One or more data is missing' })
     }
     const payload = [
+      req.params.userId,
       req.body.nama,
       req.body.deskripsi,
       req.body.tanaman

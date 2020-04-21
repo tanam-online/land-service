@@ -24,7 +24,7 @@ exports.getByUserId = async (userId) => {
 exports.create = async (payload) => {
   const client = await pool.connect()
   const result = await client.query(`INSERT INTO lahan (id_pengguna, nama, deskripsi, tanaman, created_at) 
-                                     VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING *;`, payload)
+                                     VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP) RETURNING *;`, payload)
   client.release()
   return result
 }

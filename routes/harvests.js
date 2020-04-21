@@ -43,12 +43,17 @@ router.get('/:landId', async (req, res) => {
  * POST new harvest.
  * @param req in JSON format
  */
-router.post('/', async (req, res) => {
+router.post('/:landId', async (req, res) => {
   try {
-    if (!req.body.nama || !req.body.email || !req.body.password || !req.body.no_telepon || !req.body.role) {
+    if (!req.params.landId || !req.body.deskripsi || !req.body.waktu || !req.body.hasil || !req.body.profit) {
       return res.status(400).send({ status: 400, message: 'One or more data is missing' })
     }
     const payload = [
+      req.params.landId,
+      req.body.deskripsi,
+      req.body.waktu,
+      req.body.hasil,
+      req.body.profit
     ]
     const result = await Harvest.create(payload)
     const results = {
