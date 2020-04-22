@@ -1,5 +1,7 @@
 # Tanam Land Service
 
+API is documented at Swagger [app.swaggerhub.com/apis-docs/isfanr/Tanam](https://app.swaggerhub.com/apis-docs/isfanr/Tanam/1.0.0).<br />
+
 API is accessible on [api-land-tanam.herokuapp.com](https://api-land-tanam.herokuapp.com).<br />
 
 This project was bootstrapped with [Express Generator](https://expressjs.com/en/starter/generator.html).
@@ -8,7 +10,19 @@ This project was bootstrapped with [Express Generator](https://expressjs.com/en/
 
 ``` bash
 [GET] '/' = Check if API is live
-TBD...
+[GET] '/lands' = Get all lands
+[GET] '/lands/by-id/:id' = Get land by land id
+[GET] '/lands/by-user/:userId' = Get lands by user id
+[POST] '/lands/:userId' = Create new land by user id
+[DELETE] '/lands/:id' = Delete land by id
+[GET] '/harvests' = Get all harvests
+[GET] '/harvests/:landId' = Get harvests by land id
+[POST] '/harvests/:landId' = Create new harvest by land id
+[DELETE] '/harvests/:id' = Delete harvest by id
+[GET] '/activities' = Get all activities
+[GET] '/activities/:landId' = Get activities by land id
+[POST] '/activities/:landId' = Create new activity by land id
+[DELETE] '/activities/:id' = Delete activity by id
 ```
 
 ## Available Scripts
